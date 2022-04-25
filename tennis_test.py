@@ -1,6 +1,8 @@
 import subprocess
+import sys
 
-path_to_script = '../ex1/tennis.sh'
+path_to_script = sys.argv[1]
+
 if __name__ == '__main__':
     r1 = subprocess.run(path_to_script, input=b'5\n10\n5\n10\n15\n10\n15\n10\n10\n10\n',
                         capture_output=True).stdout
@@ -13,10 +15,15 @@ if __name__ == '__main__':
         e2 = f.read()
     with open('expected3', 'rb') as f:
         e3 = f.read()
-
+    f = True
     if e1 != r1:
+        f = False
         print('error test 1')
     if e2 != r2:
+        f = False
         print('error test 2')
     if e3 != r3:
+        f = False
         print('error test 3')
+    if f:
+        print('passed all tests')
